@@ -58,3 +58,6 @@ Otávio está em uma das pontas.
 
 Na terceira posição está o menino que gosta do Jogo da Forca.
 
+<img width="980" alt="image" src="https://github.com/user-attachments/assets/7c31c7dc-bfc5-489d-a077-95a21455242a" />
+
+
