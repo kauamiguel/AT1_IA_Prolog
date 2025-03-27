@@ -21,7 +21,7 @@ jogo('3 ou Mais').
 jogo('Caça Palavras'). 
 jogo('Cubo Vermelho'). 
 jogo('Jogo da Forca'). 
-jogo('Prob. de Logica').
+jogo('Prob. de Logica')
 
 materia(biologia). 
 materia(geografia). 
@@ -39,12 +39,12 @@ suco(uva).
     % Na terceira posição está quem gosta de suco de Morango.
     % Lenin está na quinta posição.
     % Na primeira posição está quem gosta de suco de Limão.
-
+    % Na terceira posição está o menino que gosta DO Jogo da Forca
 solucao(Meninos) :-
     Meninos = [
         menino(Mochila1, Nome1, Mes1, Jogo1, Materia1, limao),    
         menino(Mochila2, Nome2, Mes2, Jogo2, Materia2, Suco2),
-        menino(Mochila3, Nome3, Mes3, Jogo3, Materia3, morango),  
+        menino(Mochila3, Nome3, Mes3, 'Jogo da Forca', Materia3, morango),  
         menino(Mochila4, Nome4, Mes4, Jogo4, Materia4, Suco4),
         menino(Mochila5, lenin, Mes5, Jogo5, Materia5, Suco5)     
     ],
