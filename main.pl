@@ -21,7 +21,7 @@ jogo('3 ou Mais').
 jogo('Caça Palavras'). 
 jogo('Cubo Vermelho'). 
 jogo('Jogo da Forca'). 
-jogo('Prob. de Logica')
+jogo('Prob. de Logica').
 
 materia(biologia). 
 materia(geografia). 
@@ -49,10 +49,18 @@ solucao(Meninos) :-
         menino(Mochila5, lenin, Mes5, Jogo5, Materia5, Suco5)     
     ],
     gosta_biologia_e_morango(Meninos),
+    otavio_esta_em_uma_das_pontas(Meninos),
     imprimr_lista(Meninos).
 
 gosta_biologia_e_morango(Meninos) :-
-    member(menino(_, _, _, _, biologia, morango), Meninos).
+    nth1(3, Meninos, menino(_, _, _, _, biologia, morango)).
+
+otavio_esta_em_uma_das_pontas(Meninos) :-
+    Meninos = [Primeiro | _], Primeiro = menino(_, otavio, _, _, _, _);
+    last(Meninos, Ultimo), Ultimo = menino(_, otavio, _, _, _, _).
+
+joao_gosta_de_historia(Meninos) :-
+    member(menino(_, joao, _, _, historia, _), Meninos).
 
 % Predicado para imprimir a lista
 imprimr_lista([]).  
