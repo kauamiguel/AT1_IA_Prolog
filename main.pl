@@ -56,7 +56,16 @@ solucao(Meninos) :-
     will_ao_lado_de_logicaproblemas(Meninos),
     mochilabranca_esta_ao_lado_will(Meninos),
     forca_ao_lado_de_mochila_vermelha(Meninos),
-    % matematica_gosta_de_maracuja(Meninos),
+    %matematica_gosta_de_maracuja(Meninos),
+    %joao_gosta_de_historia(Meninos),
+    quem_gosta_de_matematica_gosta_de_maracuja(Meninos),
+    laranja_ultimaposicao_pois_sobrou(Meninos),
+    
+    primeira_posicao(Meninos),
+    segunda_posicao(Meninos),
+    terceira_posicao(Meninos),
+    quarta_posicao(Meninos),
+    quinta_posicao(Meninos),
     imprimr_lista(Meninos).
 
 gosta_biologia_e_morango(Meninos) :-
@@ -102,7 +111,31 @@ matematica_gosta_de_maracuja(Meninos) :-
     member(menino(maracuja, _, _, _, matematica, _), Meninos). 
 
 matematica_dezembro(Meninos) :-
-    member(menino(_, _, dezembro, _, matematica, _), Meninos).     
+    member(menino(_, _, dezembro, _, matematica, _), Meninos).   
+
+joao_gosta_de_historia(Meninos) :-
+    member(menino(_, joao, _, _, historia, _), Meninos). 
+
+quem_gosta_de_matematica_gosta_de_maracuja(Meninos) :-
+    member(menino(_, _, _, _, matematica, maracuja), Meninos). 
+
+laranja_ultimaposicao_pois_sobrou(Meninos) :-
+    nth1(5, Meninos, menino(_, _, _, _, _, laranja)).
+
+primeira_posicao(Meninos) :-
+    nth1(1, Meninos, menino(verde, _, agosto, 'Caça Palavras', geografia, _)).
+
+segunda_posicao(Meninos) :-
+    nth1(2, Meninos, menino(_, denis, dezembro, _, _, _)).
+
+terceira_posicao(Meninos) :-
+    nth1(3, Meninos, menino(azul, will,janeiro, 'Jogo da Forca', biologia, morango)).
+
+quarta_posicao(Meninos) :-
+    nth1(4, Meninos, menino(vermelha, joao, setembro, 'Prob. de Logica', historia, uva)).
+
+quinta_posicao(Meninos) :-
+    nth1(5, Meninos, menino(amarela, lenin, maio, 'Cubo Vermelho', portugues, laranja)).        
 
 % Predicado para imprimir a lista
 imprimr_lista([]).  
