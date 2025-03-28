@@ -54,6 +54,7 @@ solucao(Meninos) :-
     gosta_logica_e_uva(Meninos),
     treoumais_esta_ao_lado_problogica(Meninos),
     will_ao_lado_de_logicaproblemas(Meninos),
+    mochilabranca_esta_ao_lado_will(Meninos),
     imprimr_lista(Meninos).
 
 gosta_biologia_e_morango(Meninos) :-
@@ -86,6 +87,10 @@ will_ao_lado_de_logicaproblemas(Meninos) :-
     nextto(menino(_, _, _, 'Prob. de Logica', _, _), 
            menino(_, will, _, _, _, _), 
            Meninos).    
+
+mochilabranca_esta_ao_lado_will(Meninos) :-
+    nth1(1, Meninos, menino(branca, _, _, _, _, _)).
+
 
 % Predicado para imprimir a lista
 imprimr_lista([]).  
