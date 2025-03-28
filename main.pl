@@ -53,6 +53,7 @@ solucao(Meninos) :-
     uva_a_esquerda_de_portugues(Meninos),
     gosta_logica_e_uva(Meninos),
     treoumais_esta_ao_lado_problogica(Meninos),
+    will_ao_lado_de_logicaproblemas(Meninos),
     imprimr_lista(Meninos).
 
 gosta_biologia_e_morango(Meninos) :-
@@ -77,6 +78,14 @@ gosta_logica_e_uva(Meninos) :-
 
 treoumais_esta_ao_lado_problogica(Meninos) :-
     nth1(2, Meninos, menino(_, _, _, '3 ou Mais', _, _)).
+
+will_ao_lado_de_logicaproblemas(Meninos) :-
+    nextto(menino(_, will, _, _, _, _), 
+           menino(_, _, _, 'Prob. de Logica', _, _), 
+           Meninos);
+    nextto(menino(_, _, _, 'Prob. de Logica', _, _), 
+           menino(_, will, _, _, _, _), 
+           Meninos).    
 
 % Predicado para imprimir a lista
 imprimr_lista([]).  
