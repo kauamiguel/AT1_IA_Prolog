@@ -50,6 +50,7 @@ solucao(Meninos) :-
     ],
     gosta_biologia_e_morango(Meninos),
     otavio_esta_em_uma_das_pontas(Meninos),
+    uva_a_esquerda_de_portugues(Meninos),
     imprimr_lista(Meninos).
 
 gosta_biologia_e_morango(Meninos) :-
@@ -62,6 +63,13 @@ otavio_esta_em_uma_das_pontas(Meninos) :-
 joao_gosta_de_historia(Meninos) :-
     member(menino(_, joao, _, _, historia, _), Meninos).
 
+cubovermelho_esta_em_uma_das_pontas(Meninos) :-
+    Meninos = [Primeiro | _], Primeiro = menino(_, _, _, 'Cubo Vermelho', _, _);
+    last(Meninos, Ultimo), Ultimo = menino(_, _, _,'Cubo Vermelho', _, _).
+
+uva_a_esquerda_de_portugues(Meninos) :-
+    append(Left, [menino(_, _, _, _, _, uva), menino(_, _, _, _, portugues, _) | Right], Meninos).
+    
 % Predicado para imprimir a lista
 imprimr_lista([]).  
 imprimr_lista([H|T]) :- 
