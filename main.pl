@@ -55,6 +55,7 @@ solucao(Meninos) :-
     treoumais_esta_ao_lado_problogica(Meninos),
     will_ao_lado_de_logicaproblemas(Meninos),
     mochilabranca_esta_ao_lado_will(Meninos),
+    forca_ao_lado_de_mochila_vermelha(Meninos),
     imprimr_lista(Meninos).
 
 gosta_biologia_e_morango(Meninos) :-
@@ -89,9 +90,12 @@ will_ao_lado_de_logicaproblemas(Meninos) :-
            Meninos).    
 
 mochilabranca_esta_ao_lado_will(Meninos) :-
-    nth1(1, Meninos, menino(branca, _, _, _, _, _)).
+    nth1(2, Meninos, menino(branca,_, _, _, _, _)).
 
-
+forca_ao_lado_de_mochila_vermelha(Meninos) :-
+    nextto(menino(_, _, _, 'Jogo da Forca', _, _), menino(vermelha, _, _, _, _, _), Meninos)
+    ;
+    nextto(menino(vermelha, _, _, _, _, _), menino(_, _, _, 'Jogo da Forca', _, _), Meninos).
 % Predicado para imprimir a lista
 imprimr_lista([]).  
 imprimr_lista([H|T]) :- 
