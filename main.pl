@@ -56,6 +56,7 @@ solucao(Meninos) :-
     will_ao_lado_de_logicaproblemas(Meninos),
     mochilabranca_esta_ao_lado_will(Meninos),
     forca_ao_lado_de_mochila_vermelha(Meninos),
+    % matematica_gosta_de_maracuja(Meninos),
     imprimr_lista(Meninos).
 
 gosta_biologia_e_morango(Meninos) :-
@@ -96,6 +97,13 @@ forca_ao_lado_de_mochila_vermelha(Meninos) :-
     nextto(menino(_, _, _, 'Jogo da Forca', _, _), menino(vermelha, _, _, _, _, _), Meninos)
     ;
     nextto(menino(vermelha, _, _, _, _, _), menino(_, _, _, 'Jogo da Forca', _, _), Meninos).
+
+matematica_gosta_de_maracuja(Meninos) :-
+    member(menino(maracuja, _, _, _, matematica, _), Meninos). 
+
+matematica_dezembro(Meninos) :-
+    member(menino(_, _, dezembro, _, matematica, _), Meninos).     
+
 % Predicado para imprimir a lista
 imprimr_lista([]).  
 imprimr_lista([H|T]) :- 
