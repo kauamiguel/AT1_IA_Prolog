@@ -51,6 +51,7 @@ solucao(Meninos) :-
     gosta_biologia_e_morango(Meninos),
     otavio_esta_em_uma_das_pontas(Meninos),
     uva_a_esquerda_de_portugues(Meninos),
+    gosta_logica_e_uva(Meninos),
     imprimr_lista(Meninos).
 
 gosta_biologia_e_morango(Meninos) :-
@@ -69,7 +70,10 @@ cubovermelho_esta_em_uma_das_pontas(Meninos) :-
 
 uva_a_esquerda_de_portugues(Meninos) :-
     append(Left, [menino(_, _, _, _, _, uva), menino(_, _, _, _, portugues, _) | Right], Meninos).
-    
+
+gosta_logica_e_uva(Meninos) :-
+     member(menino(_, _, _,'Prob. de Logica', _, uva), Meninos).
+
 % Predicado para imprimir a lista
 imprimr_lista([]).  
 imprimr_lista([H|T]) :- 
