@@ -69,10 +69,11 @@ solucao(Meninos) :-
     quem_gosta_de_matematica_gosta_de_maracuja(Meninos),
     joao_gosta_de_historia(Meninos),
     laranja_ultimaposicao_pois_sobrou(Meninos),
-    matematica_dezembro(Meninos), % Marcar para tirar dúvida com o prof
+    matematica_dezembro(Meninos),
     geografia_primeiraposicao_pois_sobrou(Meninos),
     %azul_com_janeiro(Meninos),
     setembro_ao_lado_de_laranja(Meninos),
+    %cubovermelho_esta_em_uma_das_pontas(Meninos),
     imprimir_lista(Meninos).
 
 
@@ -153,6 +154,12 @@ setembro_ao_lado_de_laranja(Meninos) :-
     ;
     nextto(menino(_, _, _, _, _, laranja), menino(_, _, setembro, _, _, _), Meninos).
 
+% O garoto que nasceu em setembro está ao lado de quem gosta de jogar Cubo Vermelho.
+setembro_ao_lado_de_cubovermelho(Meninos) :-
+    nextto(menino(_, _, setembro, _, _, _), menino(_, _, _, 'Cubo Vermelho', _, _), Meninos)
+    ;
+    nextto(menino(_, _, _, 'Cubo Vermelho', _, _), menino(_, _, setembro, _, _, _), Meninos).
+  
 
 % DEFINICAO DE ALLDIFERENT
 alldifferent([]).
@@ -160,7 +167,7 @@ alldifferent([]).
     not(member(H,T)),
 	alldifferent(T).
 
-% Predicado para imprimir a lista
+% Imprimir a lista
 imprimir_lista([]).  
 imprimir_lista([H|T]) :- 
     writeln(H),  
