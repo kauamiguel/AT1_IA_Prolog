@@ -39,7 +39,7 @@ suco(uva).
     % Na terceira posição está quem gosta de suco de Morango.
     % Lenin está na quinta posição.
     % Na primeira posição está quem gosta de suco de Limão.
-    % Na terceira posição está o menino que gosta DO Jogo da Forca
+    % Na terceira posição está o menino que gosta Do Jogo da Forca
 solucao(Meninos) :-
     Meninos = [
         menino(Mochila1, Nome1, Mes1, Jogo1, Materia1, limao),    
@@ -48,6 +48,10 @@ solucao(Meninos) :-
         menino(Mochila4, Nome4, Mes4, Jogo4, Materia4, Suco4),
         menino(Mochila5, lenin, Mes5, Jogo5, Materia5, Suco5)     
     ],
+
+    # Materias = [Materia1, Materia2, Materia3, Materia4, Materia5],
+    # alldifferent(Materias),
+
     gosta_biologia_e_morango(Meninos),
     otavio_esta_em_uma_das_pontas(Meninos),
     uva_a_esquerda_de_portugues(Meninos),
@@ -56,35 +60,37 @@ solucao(Meninos) :-
     will_ao_lado_de_logicaproblemas(Meninos),
     mochilabranca_esta_ao_lado_will(Meninos),
     forca_ao_lado_de_mochila_vermelha(Meninos),
-    %matematica_gosta_de_maracuja(Meninos),
-    %joao_gosta_de_historia(Meninos),
+
+    matematica_gosta_de_maracuja(Meninos),
+    joao_gosta_de_historia(Meninos),
+
     quem_gosta_de_matematica_gosta_de_maracuja(Meninos),
     laranja_ultimaposicao_pois_sobrou(Meninos),
-    
-    primeira_posicao(Meninos),
-    segunda_posicao(Meninos),
-    terceira_posicao(Meninos),
-    quarta_posicao(Meninos),
-    quinta_posicao(Meninos),
     imprimr_lista(Meninos).
 
+%O garoto que gosta de Biologia gosta de suco de Morango.
 gosta_biologia_e_morango(Meninos) :-
-    nth1(3, Meninos, menino(_, _, _, _, biologia, morango)).
+    member(menino(_, _, _, _, biologia, morango), Meninos).
 
+%Otávio está em uma das pontas.
 otavio_esta_em_uma_das_pontas(Meninos) :-
     Meninos = [Primeiro | _], Primeiro = menino(_, otavio, _, _, _, _);
     last(Meninos, Ultimo), Ultimo = menino(_, otavio, _, _, _, _).
 
+%João gosta de história.
 joao_gosta_de_historia(Meninos) :-
     member(menino(_, joao, _, _, historia, _), Meninos).
 
+%Em uma das pontas está o menino que adora jogar Cubo Vermelho.
 cubovermelho_esta_em_uma_das_pontas(Meninos) :-
     Meninos = [Primeiro | _], Primeiro = menino(_, _, _, 'Cubo Vermelho', _, _);
     last(Meninos, Ultimo), Ultimo = menino(_, _, _,'Cubo Vermelho', _, _).
 
+%Quem gosta de suco de Uva está exatamente à esquerda de quem gosta de Português.
 uva_a_esquerda_de_portugues(Meninos) :-
     append(Left, [menino(_, _, _, _, _, uva), menino(_, _, _, _, portugues, _) | Right], Meninos).
 
+%Quem gosta de suco de Uva gosta de Problemas de Lógica.
 gosta_logica_e_uva(Meninos) :-
      nth1(4, Meninos, menino(_, _, _, 'Prob. de Logica', _, uva)).
 
@@ -122,20 +128,11 @@ quem_gosta_de_matematica_gosta_de_maracuja(Meninos) :-
 laranja_ultimaposicao_pois_sobrou(Meninos) :-
     nth1(5, Meninos, menino(_, _, _, _, _, laranja)).
 
-primeira_posicao(Meninos) :-
-    nth1(1, Meninos, menino(verde, _, agosto, 'Caça Palavras', geografia, _)).
-
-segunda_posicao(Meninos) :-
-    nth1(2, Meninos, menino(_, denis, dezembro, _, _, _)).
-
-terceira_posicao(Meninos) :-
-    nth1(3, Meninos, menino(azul, will,janeiro, 'Jogo da Forca', biologia, morango)).
-
-quarta_posicao(Meninos) :-
-    nth1(4, Meninos, menino(vermelha, joao, setembro, 'Prob. de Logica', historia, uva)).
-
-quinta_posicao(Meninos) :-
-    nth1(5, Meninos, menino(amarela, lenin, maio, 'Cubo Vermelho', portugues, laranja)).        
+% DEFINICAO DE ALLDIFERENT
+alldifferent([]).
+	alldifferent([H|T]):- 
+    not(member(H,T)),
+	alldifferent(T).
 
 % Predicado para imprimir a lista
 imprimr_lista([]).  
