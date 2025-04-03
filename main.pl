@@ -35,22 +35,28 @@ suco(maracuja).
 suco(morango). 
 suco(uva).
 
-% Posicoes que já sabemos:
-    % Na terceira posição está quem gosta de suco de Morango.
-    % Lenin está na quinta posição.
-    % Na primeira posição está quem gosta de suco de Limão.
-    % Na terceira posição está o menino que gosta Do Jogo da Forca
+
 solucao(Meninos) :-
     Meninos = [
-        menino(Mochila1, Nome1, Mes1, Jogo1, Materia1, limao),    
+        menino(Mochila1, Nome1, Mes1, Jogo1, Materia1, Suco1),    
         menino(Mochila2, Nome2, Mes2, Jogo2, Materia2, Suco2),
-        menino(Mochila3, Nome3, Mes3, 'Jogo da Forca', Materia3, morango),  
+        menino(Mochila3, Nome3, Mes3, Jogo3, Materia3, Suco3),  
         menino(Mochila4, Nome4, Mes4, Jogo4, Materia4, Suco4),
-        menino(Mochila5, lenin, Mes5, Jogo5, Materia5, Suco5)     
+        menino(Mochila5, Nome5, Mes5, Jogo5, Materia5, Suco5)     
     ],
 
-    # Materias = [Materia1, Materia2, Materia3, Materia4, Materia5],
-    # alldifferent(Materias),
+    % Posicoes que já sabemos:
+    Suco1 = limao,               
+    Suco3 = morango,             
+    Nome5 = lenin,               
+    Jogo3 = 'Jogo da Forca',
+
+    %alldifferent([Mochila1, Mochila2, Mochila3, Mochila4, Mochila5]),
+    %alldifferent([Nome1, Nome2, Nome3, Nome4, Nome5]),
+    %alldifferent([Mes1, Mes2, Mes3, Mes4, Mes5]),
+    %alldifferent([Jogo1, Jogo2, Jogo3, Jogo4, Jogo5]),
+    %alldifferent([Materia1, Materia2, Materia3, Materia4, Materia5]),
+    %alldifferent([limao, Suco2, morango, Suco4, Suco5]),
 
     gosta_biologia_e_morango(Meninos),
     otavio_esta_em_uma_das_pontas(Meninos),
@@ -60,13 +66,15 @@ solucao(Meninos) :-
     will_ao_lado_de_logicaproblemas(Meninos),
     mochilabranca_esta_ao_lado_will(Meninos),
     forca_ao_lado_de_mochila_vermelha(Meninos),
-
-    matematica_gosta_de_maracuja(Meninos),
-    joao_gosta_de_historia(Meninos),
-
     quem_gosta_de_matematica_gosta_de_maracuja(Meninos),
+    joao_gosta_de_historia(Meninos),
     laranja_ultimaposicao_pois_sobrou(Meninos),
-    imprimr_lista(Meninos).
+    matematica_dezembro(Meninos), % Marcar para tirar dúvida com o prof
+    geografia_primeiraposicao_pois_sobrou(Meninos),
+    %azul_com_janeiro(Meninos),
+    setembro_ao_lado_de_laranja(Meninos),
+    imprimir_lista(Meninos).
+
 
 %O garoto que gosta de Biologia gosta de suco de Morango.
 gosta_biologia_e_morango(Meninos) :-
@@ -92,11 +100,12 @@ uva_a_esquerda_de_portugues(Meninos) :-
 
 %Quem gosta de suco de Uva gosta de Problemas de Lógica.
 gosta_logica_e_uva(Meninos) :-
-     nth1(4, Meninos, menino(_, _, _, 'Prob. de Logica', _, uva)).
+    member(menino(_, _, _, 'Prob. de Logica', _, uva), Meninos). 
 
 treoumais_esta_ao_lado_problogica(Meninos) :-
     nth1(2, Meninos, menino(_, _, _, '3 ou Mais', _, _)).
 
+% Will está ao lado do menino que gosta de Problemas de Lógica.
 will_ao_lado_de_logicaproblemas(Meninos) :-
     nextto(menino(_, will, _, _, _, _), 
            menino(_, _, _, 'Prob. de Logica', _, _), 
@@ -105,28 +114,45 @@ will_ao_lado_de_logicaproblemas(Meninos) :-
            menino(_, will, _, _, _, _), 
            Meninos).    
 
+% O garoto da mochila Branca está exatamente à esquerda de Will.
 mochilabranca_esta_ao_lado_will(Meninos) :-
     nth1(2, Meninos, menino(branca,_, _, _, _, _)).
+    %nextto(menino(branca, _, _, _, _, _), 
+          % menino(_, will, _, _, _, _), 
+           %Meninos).
 
 forca_ao_lado_de_mochila_vermelha(Meninos) :-
     nextto(menino(_, _, _, 'Jogo da Forca', _, _), menino(vermelha, _, _, _, _, _), Meninos)
     ;
     nextto(menino(vermelha, _, _, _, _, _), menino(_, _, _, 'Jogo da Forca', _, _), Meninos).
 
-matematica_gosta_de_maracuja(Meninos) :-
-    member(menino(maracuja, _, _, _, matematica, _), Meninos). 
+quem_gosta_de_matematica_gosta_de_maracuja(Meninos) :-
+    member(menino(_, _, _, _, matematica, maracuja), Meninos).  
 
+% O menino que gosta de Matemática nasceu em dezembro.
 matematica_dezembro(Meninos) :-
     member(menino(_, _, dezembro, _, matematica, _), Meninos).   
 
+%Joao gosta de historia
 joao_gosta_de_historia(Meninos) :-
     member(menino(_, joao, _, _, historia, _), Meninos). 
 
-quem_gosta_de_matematica_gosta_de_maracuja(Meninos) :-
-    member(menino(_, _, _, _, matematica, maracuja), Meninos). 
-
 laranja_ultimaposicao_pois_sobrou(Meninos) :-
     nth1(5, Meninos, menino(_, _, _, _, _, laranja)).
+
+geografia_primeiraposicao_pois_sobrou(Meninos) :-
+    nth1(1, Meninos, menino(_, _, _, _, geografia, _)).
+
+% O dono da mochila Azul nasceu em janeiro.
+azul_com_janeiro(Meninos):-
+    member(menino(azul, _, janeiro, _, _, _), Meninos).
+
+% O menino que nasceu no mes de Setembro está ao lado de quem gosta de suco de Laranja.
+setembro_ao_lado_de_laranja(Meninos) :-
+    nextto(menino(_, _, setembro, _, _, _), menino(_, _, _, _, _, laranja), Meninos)
+    ;
+    nextto(menino(_, _, _, _, _, laranja), menino(_, _, setembro, _, _, _), Meninos).
+
 
 % DEFINICAO DE ALLDIFERENT
 alldifferent([]).
@@ -135,10 +161,10 @@ alldifferent([]).
 	alldifferent(T).
 
 % Predicado para imprimir a lista
-imprimr_lista([]).  
-imprimr_lista([H|T]) :- 
+imprimir_lista([]).  
+imprimir_lista([H|T]) :- 
     writeln(H),  
-    imprimr_lista(T).
+    imprimir_lista(T).
 
 % Como testar:
 % ?- solucao(Meninos).

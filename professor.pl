@@ -319,8 +319,9 @@ write('CHEGAMOS AO FIM DO MODELO')
 
 % DEFINICAO DE ALLDIFERENT
 	alldifferent([]).
-	alldifferent([H|T]):- not(member(H,T)),
-	                      alldifferent(T).
+	alldifferent([H|T]):- 
+    not(member(H,T)),
+	alldifferent(T).
 
 	imprime_lista([]):- write('\n\n FIM do imprime_lista \n').
 	imprime_lista([H|T]):-
