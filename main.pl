@@ -108,8 +108,8 @@ cubovermelho_esta_em_uma_das_pontas(Meninos) :-
 
 %Quem gosta de suco de Uva está exatamente à esquerda de quem gosta de Português.
 uva_a_esquerda_de_portugues(Meninos) :-
-    append(Left, [menino(_, _, _, _, _, uva), menino(_, _, _, _, portugues, _) | Right], Meninos).
-
+    append(_, [menino(_, _, _, _, _, uva), menino(_, _, _, _, portugues, _) | _], Meninos).
+    
 %Quem gosta de suco de Uva gosta de Problemas de Lógica.
 gosta_logica_e_uva(Meninos) :-
     member(menino(_, _, _, 'Prob. de Logica', _, uva), Meninos). 
