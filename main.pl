@@ -71,9 +71,20 @@ solucao(Meninos) :-
     laranja_ultimaposicao_pois_sobrou(Meninos),
     matematica_dezembro(Meninos),
     geografia_primeiraposicao_pois_sobrou(Meninos),
-    %azul_com_janeiro(Meninos),
     setembro_ao_lado_de_laranja(Meninos),
-    %cubovermelho_esta_em_uma_das_pontas(Meninos),
+    denis_segundaposicao_pois_sobrou(Meninos),
+    setembro_ao_lado_de_cubovermelho(Meninos),
+    cubovermelho_esta_em_uma_das_pontas(Meninos),
+    cacapalavras_primeiraposicao_pois_sobrou(Meninos),
+    janeiro_ao_lado_de_setembro(Meninos),
+    logica_ao_lado_de_amarela(Meninos),
+    azul_com_janeiro(Meninos),
+    uva_a_direita_de_azul(Meninos),
+
+    azul_a_esquerda_de_maio(Meninos),
+
+    verde_primeiraposicao_pois_sobrou(Meninos),
+    agosto_primeiraposicao_pois_sobrou(Meninos),
     imprimir_lista(Meninos).
 
 
@@ -134,10 +145,6 @@ quem_gosta_de_matematica_gosta_de_maracuja(Meninos) :-
 matematica_dezembro(Meninos) :-
     member(menino(_, _, dezembro, _, matematica, _), Meninos).   
 
-%Joao gosta de historia
-joao_gosta_de_historia(Meninos) :-
-    member(menino(_, joao, _, _, historia, _), Meninos). 
-
 laranja_ultimaposicao_pois_sobrou(Meninos) :-
     nth1(5, Meninos, menino(_, _, _, _, _, laranja)).
 
@@ -160,6 +167,37 @@ setembro_ao_lado_de_cubovermelho(Meninos) :-
     ;
     nextto(menino(_, _, _, 'Cubo Vermelho', _, _), menino(_, _, setembro, _, _, _), Meninos).
   
+denis_segundaposicao_pois_sobrou(Meninos) :-
+    nth1(2, Meninos, menino(_, denis, _, _, _, _)).
+
+cacapalavras_primeiraposicao_pois_sobrou(Meninos) :-
+    nth1(1, Meninos, menino(_, _, _, 'Caça Palavras', _, _)).    
+
+% Quem curte Problemas de Lógica está ao lado do menino da mochila Amarela.
+logica_ao_lado_de_amarela(Meninos) :-
+    nextto(menino(_, _, _, 'Prob. de Logica', _, _), menino(amarela, _, _, _, _, _), Meninos)
+    ;
+    nextto(menino(amarela, _, _, _, _, _), menino(_, _, _, 'Prob. de Logica', _, _), Meninos).
+    
+% O menino que gosta de suco de Uva está em algum lugar à direita do garoto da mochila Azul.
+uva_a_direita_de_azul(Meninos) :-
+    append(_, [menino(azul, _, _, _, _, _), menino(_, _, _, _, _, uva) | _], Meninos).
+
+% O garoto da mochila Azul está em algum lugar à esquerda de quem nasceu em maio.
+azul_a_esquerda_de_maio(Meninos) :-
+    nth1(5, Meninos, menino(_, _, maio, _, _, _)).
+
+% O menino que nasceu em janeiro está ao lado de quem nasceu em Setembro.
+janeiro_ao_lado_de_setembro(Meninos) :-
+    nextto(menino(_, _, janeiro, _, _, _), menino(_, _, setembro, _, _, _), Meninos)
+    ;
+    nextto(menino(_, _, setembro, _, _, _), menino(_, _, janeiro, _, _, _), Meninos).
+
+verde_primeiraposicao_pois_sobrou(Meninos) :-
+    nth1(1, Meninos, menino(verde, _, _, _, _, _)).
+
+agosto_primeiraposicao_pois_sobrou(Meninos) :-
+    nth1(1, Meninos, menino(_, _, agosto, _, _, _)).    
 
 % DEFINICAO DE ALLDIFERENT
 alldifferent([]).
