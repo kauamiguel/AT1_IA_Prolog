@@ -128,10 +128,9 @@ will_ao_lado_de_logicaproblemas(Meninos) :-
 
 % O garoto da mochila Branca está exatamente à esquerda de Will.
 mochilabranca_esta_ao_lado_will(Meninos) :-
-    nth1(2, Meninos, menino(branca,_, _, _, _, _)).
-    %nextto(menino(branca, _, _, _, _, _), 
-          % menino(_, will, _, _, _, _), 
-           %Meninos).
+    nextto(menino(branca, _, _, _, _, _), menino(_, will, _, _, _, _), Meninos)
+    ;
+    nextto(menino(_, will, _, _, _, _), menino(branca, _, _, _, _, _), Meninos).
 
 forca_ao_lado_de_mochila_vermelha(Meninos) :-
     nextto(menino(_, _, _, 'Jogo da Forca', _, _), menino(vermelha, _, _, _, _, _), Meninos)
